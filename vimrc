@@ -50,6 +50,8 @@ endif
 filetype plugin indent on
 " cd na katalog, w którym znajduje się aktualny bufor
 autocmd BufEnter * :lcd %:p:h
+" usuń białe znaki z końców linii przy zapisie
+autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 " zaczynaj od ostatniej znanej pozycji kursora:
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g`\"" | endif
 autocmd FileType python set omnifunc=pythoncomplete#Complete
