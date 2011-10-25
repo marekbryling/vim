@@ -59,6 +59,9 @@ noremap <buffer> <Leader>gvd :call Git_diff_windows(1, 0)<cr>
 if !exists("g:git_diff_opts")
     let g:git_diff_opts = "-C -C"
 endif
+if !exists("g:git_diff_spawn_mode")
+    let g:git_diff_spawn_mode = 1
+endif
 if exists("g:git_diff_spawn_mode")
     if g:git_diff_spawn_mode == 1
         call Git_diff_windows(0, 1, g:git_diff_opts)
