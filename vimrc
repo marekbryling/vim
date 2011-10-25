@@ -78,8 +78,11 @@ map 	   <silent>.            	<ESC>:tabnext<CR>
 map        <silent>,			<ESC>:tabprevious<CR>
 "map            <silent><C-W><backspace><backspace>     <ESC>:e #<CR>
 "imap           <silent><C-W><backspace><backspace>     <ESC>:e #<CR>
+" vcs
+map 	   <silent><F4>            	<ESC>:VCSVimDiff<CR>
+map 	   <silent><M-F4>            	<ESC>:VCSVimDiff HEAD^<CR>
 " sprawdzanie pisowni
-map     <silent><F7>     :setlocal spell!<CR>
+map     <silent><F7>     <ESC>:setlocal spell!<CR>
 imap    <silent><F7>     <ESC>:setlocal spell!<CR>i<right>
 " przemieszczanie zakładek (tabów) kombinacją ALT+, ALT+.
 map <silent> <M-.> :if tabpagenr() == tabpagenr("$")\|tabm 0\|el\|exe "tabm ".tabpagenr()\|en<CR>
