@@ -44,6 +44,7 @@ if has("gui_running")
 		set nowrap
 		set cursorline         	    " zaznacz linię z kursorem
 		set gfn=Courier\ New\ 8
+        highlight SpellBad term=underline gui=undercurl guisp=Orange
 endif
 " automatyczne rozpoznawanie typu pliku, ładowanie specyficznego, dla danego typu, pluginu (ftplugin.vim, indent.vim):
 filetype plugin indent on
@@ -59,8 +60,8 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 """ KLAWISZOLOGIA: """
 " session manager
 "nmap <F12>  :call SessionManagerToggle()<CR>
-inoremap        <Tab>   <C-R>=InsertTabWrapper("backward")<CR>
-inoremap        <S-Tab> <C-R>=InsertTabWrapper("forward")<CR>
+"inoremap        <Tab>   <C-R>=InsertTabWrapper("backward")<CR>
+"inoremap        <S-Tab> <C-R>=InsertTabWrapper("forward")<CR>
 " szukaj zaznaczonego tekstu z '*' i '#' (a nie tylko wyrazu pod kursorem):
 vnoremap        *        y/<C-R>"<CR>
 vnoremap        #        y?<C-R>"<CR>
@@ -102,5 +103,31 @@ function! s:DiffWithSaved()
 endfunction
 command! Diff call s:DiffWithSaved()
 let html_use_css=1     " domyślne używa CSS zamiast <font>
+
+" Automatyczne dopełnianie nawiasów
+imap  ( (<Esc>:call Nawias()<CR>a
+imap  [ [<Esc>:call Nawias()<CR>a
+imap  { {<Esc>:call Nawias()<CR>a
+
+function! Nawias()
+  execute "normal %"
+  let zmienna = getline(".")[col(".") - 1]
+  if zmienna == '['
+    execute "normal a]"
+  endif
+  if zmienna == '('
+    execute "normal a)"
+  endif
+  if zmienna == '{'
+    execute "normal a}"
+  endif
+  execute "normal %"
+endfunction
+" TaskList
+map     <silent><F2>     :TaskList<CR>
+" Tlist
+map     <silent><F3>     :Tlist<CR>
+
+autocmd FileType python compiler pylint
 
 " vim: fdm=marker
