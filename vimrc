@@ -32,46 +32,33 @@ set ts=4           		        " wielkość tabulacji (w spacjach)
 set expandtab
 set shiftwidth=4
 set softtabstop=4
-
-
 behave xterm
-
 if &t_Co > 2 || has("gui_running")
 		syntax on              " kolorowanie składni
 		set hlsearch           " zaznaczanie szukanego tekstu
-		" colorscheme POX       " domyślny schemat kolorów
+		colorscheme wombat     " domyślny schemat kolorów
 endif
 if has("gui_running")
 		set foldcolumn=2       		" szerokość kolumny z zakładkami
 		set guioptions=abegimrLtT 	" m.in: włącz poziomy scrollbar
 		set nowrap
-		set cursorline         	" zaznacz linię z kursorem
+		set cursorline         	    " zaznacz linię z kursorem
 		set gfn=Courier\ New\ 8
 endif
-
 " automatyczne rozpoznawanie typu pliku, ładowanie specyficznego, dla danego typu, pluginu (ftplugin.vim, indent.vim):
 filetype plugin indent on
-
-" Skrypt umożliwia uzupełnianie kodu pythona oraz szybkie przeszukiwanie dokumentacji.
-autocmd BufNewFile  *.py   source ~/.vim/autoload/pythoncomplete.vim
-" cd na katalog, w kt?rym znajduje si? aktualny bufor
-autocmd BufEnter * :lcd %:p:h  
+" cd na katalog, w którym znajduje się aktualny bufor
+autocmd BufEnter * :lcd %:p:h
 " zaczynaj od ostatniej znanej pozycji kursora:
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | execute "normal g`\"" | endif
-" autouzupełnianie z plików syntax:
-autocmd FileType * execute "setlocal complete+="."k$VIMRUNTIME/syntax/".&ft.".vim"
-" UWAGA: FileType pomija modeline, dlatego detekcja po rozszerzeniu
-autocmd BufRead *.py set foldmethod=indent     
-
-"if has("autocmd")
-"autocmd FileType python set complete+=k/home/monsun/.vim/pydiction-0.5/pydiction isk+=.,(
-"endif 
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 """ KLAWISZOLOGIA: """
-
 " session manager
 "nmap <F12>  :call SessionManagerToggle()<CR>
-
 inoremap        <Tab>   <C-R>=InsertTabWrapper("backward")<CR>
 inoremap        <S-Tab> <C-R>=InsertTabWrapper("forward")<CR>
 " szukaj zaznaczonego tekstu z '*' i '#' (a nie tylko wyrazu pod kursorem):
@@ -91,11 +78,9 @@ map        <silent>,			<ESC>:tabprevious<CR>
 " sprawdzanie pisowni
 map     <silent><F7>     :setlocal spell!<CR>
 imap    <silent><F7>     <ESC>:setlocal spell!<CR>i<right>
-" przemieszczanie zak?adek (tab?w) kombinacj? ALT+, ALT+.
+" przemieszczanie zakładek (tabów) kombinacją ALT+, ALT+.
 map <silent> <M-.> :if tabpagenr() == tabpagenr("$")\|tabm 0\|el\|exe "tabm ".tabpagenr()\|en<CR>
 map <silent> <M-,> :if tabpagenr() == 1\|exe "tabm ".tabpagenr("$")\|el\|exe "tabm ".(tabpagenr()-2)\|en<CR>
-
-
 " Uzupełnianie wyrazów przez <Tab> - TIP #102:
 function! InsertTabWrapper(direction)
         let col = col('.') - 1
@@ -107,7 +92,6 @@ function! InsertTabWrapper(direction)
                 return "\<c-n>"
         endif
 endfunction
-
 function! s:DiffWithSaved()
         let filetype=&ft
         diffthis
@@ -117,8 +101,6 @@ function! s:DiffWithSaved()
         execute "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 command! Diff call s:DiffWithSaved()
-
 let html_use_css=1     " domyślne używa CSS zamiast <font>
-let use_xhtml=1        " domyślne tworzy XHTML zamiast HTML
 
 " vim: fdm=marker
