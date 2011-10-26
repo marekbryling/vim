@@ -61,7 +61,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 """ KLAWISZOLOGIA: """
 " session manager
-"nmap <F12>  :call SessionManagerToggle()<CR>
+nmap <F12>  :call SessionManagerToggle()<CR>
 "inoremap        <Tab>   <C-R>=InsertTabWrapper("backward")<CR>
 "inoremap        <S-Tab> <C-R>=InsertTabWrapper("forward")<CR>
 " szukaj zaznaczonego tekstu z '*' i '#' (a nie tylko wyrazu pod kursorem):
@@ -88,16 +88,16 @@ imap    <silent><F7>     <ESC>:setlocal spell!<CR>i<right>
 map <silent> <M-.> :if tabpagenr() == tabpagenr("$")\|tabm 0\|el\|exe "tabm ".tabpagenr()\|en<CR>
 map <silent> <M-,> :if tabpagenr() == 1\|exe "tabm ".tabpagenr("$")\|el\|exe "tabm ".(tabpagenr()-2)\|en<CR>
 " Uzupełnianie wyrazów przez <Tab> - TIP #102:
-function! InsertTabWrapper(direction)
-        let col = col('.') - 1
-        if !col || getline('.')[col - 1] !~ '\k'
-                return "\<tab>"
-        elseif "backward" == a:direction
-                return "\<c-p>"
-        else
-                return "\<c-n>"
-        endif
-endfunction
+"function! InsertTabWrapper(direction)
+        "let col = col('.') - 1
+        "if !col || getline('.')[col - 1] !~ '\k'
+                "return "\<tab>"
+        "elseif "backward" == a:direction
+                "return "\<c-p>"
+        "else
+                "return "\<c-n>"
+        "endif
+"endfunction
 function! s:DiffWithSaved()
         let filetype=&ft
         diffthis
@@ -133,6 +133,6 @@ map     <silent><F2>     :TaskList<CR>
 " Tlist
 map     <silent><F3>     :Tlist<CR>
 
-autocmd FileType python compiler pylint
+"autocmd FileType python compiler pylint
 
 " vim: fdm=marker
