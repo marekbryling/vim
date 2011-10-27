@@ -48,6 +48,7 @@ if has("gui_running")
 endif
 " automatyczne rozpoznawanie typu pliku, ładowanie specyficznego, dla danego typu, pluginu (ftplugin.vim, indent.vim):
 filetype plugin indent on
+set ofu=syntaxcomplete#Complete
 " cd na katalog, w którym znajduje się aktualny bufor
 autocmd BufEnter * :lcd %:p:h
 " usuń białe znaki z końców linii przy zapisie
@@ -94,6 +95,8 @@ endfunction
 command! Diff call s:DiffWithSaved()
 let html_use_css=1     " domyślne używa CSS zamiast <font>
 
+" TaskList
+map     <silent><F2>     :TaskList<CR>
 
 "autocmd FileType python compiler pylint
 
