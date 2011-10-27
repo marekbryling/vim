@@ -120,6 +120,6 @@ autocmd BufWritePre *.css :call <SID>StripTrailingWhitespaces()
 autocmd BufWritePre *.xml :call <SID>StripTrailingWhitespaces()
 
 
-"autocmd FileType python compiler pylint
+autocmd FileType python compiler pylint
 
 " vim: fdm=marker
