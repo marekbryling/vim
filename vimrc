@@ -28,7 +28,7 @@ set cpoptions="A"
 set keymodel=startsel,stopsel  	" zaznaczanie z shiftem
 let python_highlight_all = 1
 let Tlist_Use_Right_Window = 1 	" panel tag?w po prawej
-set ts=4           		        " wielkość tabulacji (w spacjach)
+set tabstop=8           		        " wielkość tabulacji (w spacjach)
 set expandtab
 set shiftwidth=4
 set softtabstop=4
