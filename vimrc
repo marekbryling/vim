@@ -36,7 +36,6 @@ behave xterm
 if &t_Co > 2 || has("gui_running")
 		syntax on              " kolorowanie składni
 		set hlsearch           " zaznaczanie szukanego tekstu
-		colorscheme wombat     " domyślny schemat kolorów
 endif
 if has("gui_running")
 		set foldcolumn=2       		" szerokość kolumny z zakładkami
@@ -45,6 +44,7 @@ if has("gui_running")
 		set cursorline         	    " zaznacz linię z kursorem
 		set gfn=Courier\ New\ 8
         highlight SpellBad term=underline gui=undercurl guisp=Orange
+		colorscheme wombat     " domyślny schemat kolorów
 endif
 " automatyczne rozpoznawanie typu pliku, ładowanie specyficznego, dla danego typu, pluginu (ftplugin.vim, indent.vim):
 filetype plugin indent on
@@ -60,10 +60,6 @@ autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 """ KLAWISZOLOGIA: """
-" session manager
-nmap <F12>  :call SessionManagerToggle()<CR>
-"inoremap        <Tab>   <C-R>=InsertTabWrapper("backward")<CR>
-"inoremap        <S-Tab> <C-R>=InsertTabWrapper("forward")<CR>
 " szukaj zaznaczonego tekstu z '*' i '#' (a nie tylko wyrazu pod kursorem):
 vnoremap        *        y/<C-R>"<CR>
 vnoremap        #        y?<C-R>"<CR>
@@ -87,17 +83,6 @@ imap    <silent><F7>     <ESC>:setlocal spell!<CR>i<right>
 " przemieszczanie zakładek (tabów) kombinacją ALT+, ALT+.
 map <silent> <M-.> :if tabpagenr() == tabpagenr("$")\|tabm 0\|el\|exe "tabm ".tabpagenr()\|en<CR>
 map <silent> <M-,> :if tabpagenr() == 1\|exe "tabm ".tabpagenr("$")\|el\|exe "tabm ".(tabpagenr()-2)\|en<CR>
-" Uzupełnianie wyrazów przez <Tab> - TIP #102:
-"function! InsertTabWrapper(direction)
-        "let col = col('.') - 1
-        "if !col || getline('.')[col - 1] !~ '\k'
-                "return "\<tab>"
-        "elseif "backward" == a:direction
-                "return "\<c-p>"
-        "else
-                "return "\<c-n>"
-        "endif
-"endfunction
 function! s:DiffWithSaved()
         let filetype=&ft
         diffthis
@@ -109,29 +94,6 @@ endfunction
 command! Diff call s:DiffWithSaved()
 let html_use_css=1     " domyślne używa CSS zamiast <font>
 
-" Automatyczne dopełnianie nawiasów
-imap  ( (<Esc>:call Nawias()<CR>a
-imap  [ [<Esc>:call Nawias()<CR>a
-imap  { {<Esc>:call Nawias()<CR>a
-
-function! Nawias()
-  execute "normal %"
-  let zmienna = getline(".")[col(".") - 1]
-  if zmienna == '['
-    execute "normal a]"
-  endif
-  if zmienna == '('
-    execute "normal a)"
-  endif
-  if zmienna == '{'
-    execute "normal a}"
-  endif
-  execute "normal %"
-endfunction
-" TaskList
-map     <silent><F2>     :TaskList<CR>
-" Tlist
-map     <silent><F3>     :Tlist<CR>
 
 "autocmd FileType python compiler pylint
 
