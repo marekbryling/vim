@@ -98,6 +98,28 @@ let html_use_css=1     " domyślne używa CSS zamiast <font>
 " TaskList
 map     <silent><F2>     :TaskList<CR>
 
+" Remove trailing whitespace
+function <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+"remove all trailing whitespace for specified files before write
+autocmd BufWritePre *.py :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.rst :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.wiki :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.js :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.css :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.xml :call <SID>StripTrailingWhitespaces()
+
+
 "autocmd FileType python compiler pylint
 
 " vim: fdm=marker
