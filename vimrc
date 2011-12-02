@@ -46,9 +46,18 @@ if has("gui_running")
         highlight SpellBad term=underline gui=undercurl guisp=Orange
 		colorscheme wombat     " domyślny schemat kolorów
 endif
+
+python << EOF
+import os
+import sys
+import vim
+sys.path.append("/home/marek/.local/lib/python2.6/site-packages")
+EOF
+
 " automatyczne rozpoznawanie typu pliku, ładowanie specyficznego, dla danego typu, pluginu (ftplugin.vim, indent.vim):
 filetype plugin indent on
-set ofu=syntaxcomplete#Complete
+
+
 " cd na katalog, w którym znajduje się aktualny bufor
 autocmd BufEnter * :lcd %:p:h
 " usuń białe znaki z końców linii przy zapisie
