@@ -22,7 +22,7 @@ set fo=tcrqn                    " opcje wklejania (jak maja by? tworzone wcięci
 set hidden                      " nie wymagaj zapisu gdy przechodzisz do nowego bufora
 set tags+=./stl_tags            " tip 931
 set foldtext=FoldText()         " tekst po zwinięciu zakładki
-set foldminlines=15             " minimum 15 linie aby powstał fold
+set foldminlines=5             " minimum 15 linie aby powstał fold
 set wildmode=longest:full      	" dopełniaj jak w BASHu
 set cpoptions="A"
 set keymodel=startsel,stopsel  	" zaznaczanie z shiftem
@@ -56,6 +56,12 @@ EOF
 
 " automatyczne rozpoznawanie typu pliku, ładowanie specyficznego, dla danego typu, pluginu (ftplugin.vim, indent.vim):
 filetype plugin indent on
+
+" folding 
+augroup vimrc
+  au BufReadPre * setlocal foldmethod=indent
+  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+augroup END
 
 
 " cd na katalog, w którym znajduje się aktualny bufor
