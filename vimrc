@@ -26,12 +26,19 @@ set foldminlines=5             " minimum 15 linie aby powstał fold
 set wildmode=longest:full      	" dopełniaj jak w BASHu
 set cpoptions="A"
 set keymodel=startsel,stopsel  	" zaznaczanie z shiftem
-let python_highlight_all = 1
+"let python_highlight_all = 1
 let Tlist_Use_Right_Window = 1 	" panel tag?w po prawej
 set tabstop=8           		        " wielkość tabulacji (w spacjach)
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+let g:miniBufExplorerMoreThanOne=1
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplMapCTabSwitchWindows = 1
+let g:miniBufExplUseSingleClick = 1
+let g:miniBufExplModSelTarget = 1
 behave xterm
 if &t_Co > 2 || has("gui_running")
 		syntax on              " kolorowanie składni
