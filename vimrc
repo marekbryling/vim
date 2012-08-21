@@ -49,7 +49,8 @@ if has("gui_running")
 		set guioptions=abegimrLtT 	" m.in: włącz poziomy scrollbar
 		set nowrap
 		set cursorline         	    " zaznacz linię z kursorem
-		set gfn=Courier\ New\ 8
+		set gfn=Courier\ New\ 9
+		"set gfn=terminus\ 10
         highlight SpellBad term=underline gui=undercurl guisp=Orange
 		colorscheme wombat     " domyślny schemat kolorów
 endif
@@ -58,7 +59,6 @@ python << EOF
 import os
 import sys
 import vim
-sys.path.append("/home/marek/.local/lib/python2.6/site-packages")
 EOF
 
 " automatyczne rozpoznawanie typu pliku, ładowanie specyficznego, dla danego typu, pluginu (ftplugin.vim, indent.vim):
